@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Funcoes {
 	ArrayList<Usuario> usuarios = new ArrayList<>();
-	
+	ArrayList<Exercicio> exercicios = new ArrayList<>();
 	public Funcoes() {
 		
 	}
@@ -43,7 +43,37 @@ public class Funcoes {
 			}
 			return null;
 	}
-	
+	public boolean excluirUsuario(int Id) {
+	    return usuarios.removeIf(u -> u.getIdUsuario() == Id);
+	}
+	public boolean alterarUsuario(int codigo, Usuario usuarioparaalterar) {
+	    for (Usuario u : usuarios) {
+	        if (u.getIdUsuario() == codigo) {
+	            
+	            u.setAltura(usuarioparaalterar.getAltura());
+	            u.setNome(usuarioparaalterar.getNome());
+	            u.setEmail(usuarioparaalterar.getEmail());
+	            u.setIdade(usuarioparaalterar.getIdade());
+	            u.setSexo(usuarioparaalterar.getSexo());
+	            u.setMetacalorica(usuarioparaalterar.getMetacalorica());
+	            u.setPeso(usuarioparaalterar.getPeso());
+	            return true;
+	        }
+	    }
+	    return false; 
+	}
+	public boolean cadastrarExercicio(Scanner sc) {
+		Exercicio exe = new Exercicio();
+		Exercicio novoExe= exe.criarExercicio(sc);
+		
+		if (novoExe == null) {
+            System.out.println("Cadastro cancelado ou inválido.");
+            return false;
+        }
+		exercicios.add(novoExe);
+		return true;
+	}
+
 	
 
     
