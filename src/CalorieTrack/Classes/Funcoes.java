@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Funcoes {
 	ArrayList<Usuario> usuarios = new ArrayList<>();
 	ArrayList<Exercicio> exercicios = new ArrayList<>();
+	ArrayList<Refeicao> refeicoes = new ArrayList<>();
+	
 	public Funcoes() {
 		
 	}
@@ -43,24 +45,24 @@ public class Funcoes {
 			}
 			return null;
 	}
+	public boolean alterarUsuario(int codigo, Usuario usuarioparaalterar) {
+		for (Usuario u : usuarios) {
+			if (u.getIdUsuario() == codigo) {
+				
+				u.setAltura(usuarioparaalterar.getAltura());
+				u.setNome(usuarioparaalterar.getNome());
+				u.setEmail(usuarioparaalterar.getEmail());
+				u.setIdade(usuarioparaalterar.getIdade());
+				u.setSexo(usuarioparaalterar.getSexo());
+				u.setMetacalorica(usuarioparaalterar.getMetacalorica());
+				u.setPeso(usuarioparaalterar.getPeso());
+				return true;
+			}
+		}
+		return false; 
+	}
 	public boolean excluirUsuario(int Id) {
 	    return usuarios.removeIf(u -> u.getIdUsuario() == Id);
-	}
-	public boolean alterarUsuario(int codigo, Usuario usuarioparaalterar) {
-	    for (Usuario u : usuarios) {
-	        if (u.getIdUsuario() == codigo) {
-	            
-	            u.setAltura(usuarioparaalterar.getAltura());
-	            u.setNome(usuarioparaalterar.getNome());
-	            u.setEmail(usuarioparaalterar.getEmail());
-	            u.setIdade(usuarioparaalterar.getIdade());
-	            u.setSexo(usuarioparaalterar.getSexo());
-	            u.setMetacalorica(usuarioparaalterar.getMetacalorica());
-	            u.setPeso(usuarioparaalterar.getPeso());
-	            return true;
-	        }
-	    }
-	    return false; 
 	}
 	public boolean cadastrarExercicio(Scanner sc) {
 		Exercicio exe = new Exercicio();
@@ -73,9 +75,47 @@ public class Funcoes {
 		exercicios.add(novoExe);
 		return true;
 	}
-
+	public boolean alterarExercicio(int codigo, Exercicio exercicioparaalterar) {
+		for (Exercicio e : exercicios) {
+			if (e.getIdExercicio() == codigo) {
+				
+				e.setTipo(exercicioparaalterar.getTipo());
+				e.setIntensidade(exercicioparaalterar.getIntensidade());
+				e.setDuracao(exercicioparaalterar.getDuracao());
+				e.setCaloriasGastas(exercicioparaalterar.getCaloriasGastas());
+				
+				return true;
+			}
+		}
+		return false; 
+	}
 	
-
-    
+	public Exercicio buscarExercicio(int id) {
+		
+		for(Exercicio e: exercicios) {
+			if(e.getIdExercicio()==id) {
+				return e;
+			}
+		}
+		return null;
+	}
+	public boolean excluirExercicio(int Id) {
+	    return exercicios.removeIf(u -> u.getIdExercicio() == Id);
+	}
+	public boolean cadastrarRefeicao(Scanner sc) {
+		Refeicao ref = new Refeicao();
+		Refeicao novaRefeicao = ref.criarRefeicao(sc);
+		
+		if (novaRefeicao == null) {
+            System.out.println("Cadastro cancelado ou inválido.");
+            return false;
+        }
+		
+		
+        
+		
+		refeicoes.add(novaRefeicao);
+        return true;
+	}
 
 }

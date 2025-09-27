@@ -9,15 +9,15 @@ public class Exercicio {
 	private double duracao;
 	private String intensidade;
 	private double caloriasGastas;
-	
+	private static int ULTIMOEXERCICIO=0;
 	
 	
 	public Exercicio() {
-		super();
+		ULTIMOEXERCICIO++;
 	}
 	public Exercicio(String tipo, double duracao, String intensidade, double caloriasGastas) {
 		super();
-		
+		this.idExercicio = ULTIMOEXERCICIO;
 		this.tipo = tipo;
 		this.duracao = duracao;
 		this.intensidade = intensidade;
@@ -84,5 +84,13 @@ public class Exercicio {
 		    }
 		 return   new Exercicio(nome,duracao,intensidade,caloriasgastas);
 	}
+	@Override
+	public String toString() {
+		return "Exercicio [idExercicio=" + idExercicio + ", tipo=" + tipo + ", duracao=" + duracao + ", intensidade="
+				+ intensidade + ", caloriasGastas=" + caloriasGastas + "]";
+	}
+	
+	
+	
 	
 }

@@ -1,5 +1,6 @@
 package CalorieTrack.Classes;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,7 +15,7 @@ public class Usuario {
 	private int idade;
 	private String sexo;
 	private double metacalorica;
-	
+	ArrayList<Refeicao> refeicoes= new ArrayList();
 	public Usuario() {
 		ULTIMOIDUSUARIO++;
 	}
@@ -158,6 +159,13 @@ public class Usuario {
 	    }
 		
 		return new Usuario(nome, email, senha, peso, altura, idade, sexo, metacalorica);
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", nome=" + nome + ", email=" + email + ", senha=" + senha
+				+ ", peso=" + peso + ", altura=" + altura + ", idade=" + idade + ", sexo=" + sexo + ", metacalorica="
+				+ metacalorica + "]";
 	}
 	
 	
