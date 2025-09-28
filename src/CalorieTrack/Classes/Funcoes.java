@@ -117,5 +117,31 @@ public class Funcoes {
 		refeicoes.add(novaRefeicao);
         return true;
 	}
+	public Refeicao buscarRefeicao(int Id) {
+		for( Refeicao r: refeicoes) {
+			if(r.getIdRefeicao()==Id) {
+				return r;
+			}
+		}
+		return null;
+		
+	}
+	
+	public boolean excluirRefeicao(int Id) {
+		return refeicoes.removeIf(r->r.getIdRefeicao()==Id);
+	}
+	public boolean alterarRefeicao(Scanner sc, int codigo, Refeicao refeicaoparaalterar, String nome) {
+		for (Refeicao r : refeicoes) {
+			if (r.getIdRefeicao() == codigo) {
+				
+				r.setNomeRefeicao(refeicaoparaalterar.getNomeRefeicao());
+				r.setHorario(refeicaoparaalterar.getHorario());
+				r.alterarAlimentos(sc, nome);
+				
+				return true;
+			}
+		}
+		return false; 
+	}
 
 }

@@ -93,6 +93,30 @@ public class Refeicao {
 			return alimentos.add(a);
 	//lembrar de corrigir possiveis erros
 		}
+		public boolean alterarAlimentos(Scanner sc, String nome) {
+			String nomeAux;
+			Double calorias;
+			Double quantidade;
+			for(Alimentos al: alimentos) {
+				if(al.getNome().equalsIgnoreCase(nome)) {
+					System.out.println("Digite o novo nome");
+					nomeAux=sc.nextLine();
+					al.setNome(nomeAux);
+					
+					System.out.println("Digite o n° de calorias a cada 100g");
+					calorias= sc.nextDouble();
+					al.setCalorias(calorias);
+					sc.nextLine();
+					System.out.println("Digite a quantidade em gramas");
+					quantidade= sc.nextDouble();
+					al.setQuantidade(quantidade);
+					sc.nextLine();
+					
+					return true;
+				}
+			}
+			return false;
+		}
 
 
 		@Override
