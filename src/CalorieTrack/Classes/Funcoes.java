@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Funcoes {
-	ArrayList<Usuario> usuarios = new ArrayList<>();
-	ArrayList<Exercicio> exercicios = new ArrayList<>();
+	private ArrayList<Usuario> usuarios = new ArrayList<>();
 	ArrayList<Refeicao> refeicoes = new ArrayList<>();
 	
 	public Funcoes() {
@@ -19,7 +18,6 @@ public class Funcoes {
 		Usuario novoUsuario = temp.criarUsuario(sc);
 		
 		if (novoUsuario == null) {
-            System.out.println("Cadastro cancelado ou inválido.");
             return false;
         }
 		
@@ -45,6 +43,7 @@ public class Funcoes {
 			}
 			return null;
 	}
+	
 	public boolean alterarUsuario(int codigo, Usuario usuarioparaalterar) {
 		for (Usuario u : usuarios) {
 			if (u.getIdUsuario() == codigo) {
@@ -61,37 +60,26 @@ public class Funcoes {
 		}
 		return false; 
 	}
+	
 	public boolean excluirUsuario(int Id) {
 	    return usuarios.removeIf(u -> u.getIdUsuario() == Id);
 	}
-	public boolean cadastrarExercicio(Scanner sc) {
+	
+	//EXERCICIOS
+	
+	public boolean cadastrarExercicio(Usuario usuario, Scanner sc) {
 		Exercicio exe = new Exercicio();
-		Exercicio novoExe= exe.criarExercicio(sc);
+		Exercicio novoExe = exe.criarExercicio(sc);
 		
 		if (novoExe == null) {
-            System.out.println("Cadastro cancelado ou inválido.");
             return false;
         }
-		exercicios.add(novoExe);
+		usuario.addExercicio(novoExe);
 		return true;
 	}
-	public boolean alterarExercicio(int codigo, Exercicio exercicioparaalterar) {
-		for (Exercicio e : exercicios) {
-			if (e.getIdExercicio() == codigo) {
-				
-				e.setTipo(exercicioparaalterar.getTipo());
-				e.setIntensidade(exercicioparaalterar.getIntensidade());
-				e.setDuracao(exercicioparaalterar.getDuracao());
-				e.setCaloriasGastas(exercicioparaalterar.getCaloriasGastas());
-				
-				return true;
-			}
-		}
-		return false; 
-	}
 	
-	public Exercicio buscarExercicio(int id) {
-		
+	public Exercicio buscarExercicio(Usuario usuario, int id) {
+		ArrayList<Exercicio> exercicios = usuario.getExercicios();
 		for(Exercicio e: exercicios) {
 			if(e.getIdExercicio()==id) {
 				return e;
@@ -99,26 +87,49 @@ public class Funcoes {
 		}
 		return null;
 	}
-	public boolean excluirExercicio(int Id) {
-	    return exercicios.removeIf(u -> u.getIdExercicio() == Id);
+	
+	public boolean excluirExercicio(Usuario usuario, int id) {
+		ArrayList<Exercicio> exercicios = usuario.getExercicios();
+		for(Exercicio e: exercicios) {
+			if(e.getIdExercicio() == id) {
+				usuario.removeExercicio(e);
+			}
+			return true;
+		}
+	    return false;
 	}
-	public boolean cadastrarRefeicao(Scanner sc) {
+	
+	public boolean alterarExercicio(Usuario usuario, int id) {
+		ArrayList<Exercicio> exercicios = usuario.getExercicios();
+		for (Exercicio e : exercicios) {
+			if (e.getIdExercicio() == id) {
+				e.setTipo(e.getTipo());
+				e.setIntensidade(e.getIntensidade());
+				e.setDuracao(e.getDuracao());
+				e.setCaloriasGastas(e.getCaloriasGastas());
+				return true;
+			}
+		}
+		return false; 
+	}
+	
+	//REFEIÇÕES
+	
+	public boolean cadastrarRefeicao(Usuario usuario, Scanner sc) {
 		Refeicao ref = new Refeicao();
 		Refeicao novaRefeicao = ref.criarRefeicao(sc);
 		
 		if (novaRefeicao == null) {
-            System.out.println("Cadastro cancelado ou inválido.");
             return false;
         }
 		
-		
-        
-		
-		refeicoes.add(novaRefeicao);
+		usuario.addRefeicao(novaRefeicao);
         return true;
 	}
-	public Refeicao buscarRefeicao(int Id) {
-		for( Refeicao r: refeicoes) {
+	
+	public Refeicao buscarRefeicao(Usuario usuario, int Id) {
+		ArrayList<Refeicao> refeicoes = usuario.getRefeicoes();
+		for (Refeicao r: refeicoes) {
 			if(r.getIdRefeicao()==Id) {
 				return r;
 			}
@@ -127,15 +138,23 @@ public class Funcoes {
 		
 	}
 	
-	public boolean excluirRefeicao(int Id) {
-		return refeicoes.removeIf(r->r.getIdRefeicao()==Id);
+	public boolean excluirRefeicao(Usuario usuario, int id) {
+		ArrayList<Refeicao> refeicoes = usuario.getRefeicoes();
+		for(Refeicao r: refeicoes) {
+			if(r.getIdRefeicao() == id) {
+				usuario.removeRefeicao(r);
+			}
+			return true;
+		}
+	    return false;
 	}
-	public boolean alterarRefeicao(Scanner sc, int codigo, Refeicao refeicaoparaalterar, String nome) {
+	
+	public boolean alterarRefeicao(Usuario usuario, int id, String nome, Scanner sc) {
+		ArrayList<Refeicao> refeicoes = usuario.getRefeicoes();
 		for (Refeicao r : refeicoes) {
-			if (r.getIdRefeicao() == codigo) {
-				
-				r.setNomeRefeicao(refeicaoparaalterar.getNomeRefeicao());
-				r.setHorario(refeicaoparaalterar.getHorario());
+			if (r.getIdRefeicao() == id) {
+				r.setNomeRefeicao(r.getNomeRefeicao());
+				r.setHorario(r.getHorario());
 				r.alterarAlimentos(sc, nome);
 				
 				return true;

@@ -4,55 +4,60 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Exercicio {
+	private static int ULTIMOEXERCICIO = 0;
 	private int idExercicio;
 	private String tipo;
 	private double duracao;
 	private String intensidade;
 	private double caloriasGastas;
-	private static int ULTIMOEXERCICIO=0;
-	
 	
 	public Exercicio() {
 		ULTIMOEXERCICIO++;
 	}
+	
 	public Exercicio(String tipo, double duracao, String intensidade, double caloriasGastas) {
-		super();
 		this.idExercicio = ULTIMOEXERCICIO;
 		this.tipo = tipo;
 		this.duracao = duracao;
 		this.intensidade = intensidade;
 		this.caloriasGastas = caloriasGastas;
 	}
+	
 	public int getIdExercicio() {
 		return idExercicio;
 	}
 	public void setIdExercicio(int idExercicio) {
 		this.idExercicio = idExercicio;
 	}
+	
 	public String getTipo() {
 		return tipo;
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	
 	public double getDuracao() {
 		return duracao;
 	}
 	public void setDuracao(double duracao) {
 		this.duracao = duracao;
 	}
+	
 	public String getIntensidade() {
 		return intensidade;
 	}
 	public void setIntensidade(String intensidade) {
 		this.intensidade = intensidade;
 	}
+	
 	public double getCaloriasGastas() {
 		return caloriasGastas;
 	}
 	public void setCaloriasGastas(double caloriasGastas) {
 		this.caloriasGastas = caloriasGastas;
 	}
+	
 	public Exercicio criarExercicio(Scanner sc) {
 		
 		System.out.println("Digite o nome do exercicio:");
@@ -82,8 +87,9 @@ public class Exercicio {
 		            sc.nextLine();
 		        }
 		    }
-		 return   new Exercicio(nome,duracao,intensidade,caloriasgastas);
+		 return new Exercicio(nome,duracao,intensidade,caloriasgastas);
 	}
+	
 	@Override
 	public String toString() {
 		return "Exercicio [idExercicio=" + idExercicio + ", tipo=" + tipo + ", duracao=" + duracao + ", intensidade="

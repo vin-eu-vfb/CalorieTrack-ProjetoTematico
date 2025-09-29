@@ -15,9 +15,6 @@ public class Alimentos {
 		super();
 	}
 
-
-
-
 	public Alimentos(double quantidade, double calorias, String nome) {
 		super();
 		this.quantidade = quantidade;
@@ -32,9 +29,6 @@ public class Alimentos {
 		return quantidade;
 	}
 
-
-
-
 	public void setQuantidade(double quantidade) {
 		this.quantidade = quantidade;
 	}
@@ -45,9 +39,6 @@ public class Alimentos {
 	public double getCalorias() {
 		return calorias;
 	}
-
-
-
 
 	public void setCalorias(double calorias) {
 		this.calorias = calorias;
@@ -60,16 +51,13 @@ public class Alimentos {
 		return nome;
 	}
 
-
-
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-
-
-
+	
+	
+	
+	
 	public Alimentos criarAlimentos(Scanner sc) {
 		
 		System.out.println("Digite o nome do alimento:");

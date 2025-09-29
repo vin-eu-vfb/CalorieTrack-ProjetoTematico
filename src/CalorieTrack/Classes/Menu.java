@@ -1,5 +1,6 @@
 package CalorieTrack.Classes;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -54,9 +55,9 @@ public class Menu {
 			System.out.println(" 2 - Relatórios");
 			System.out.println(" 3 - Registro de Calorias");
 			System.out.println(" 4 - Exercícios");
-			System.out.println(" 5 - Receitas");
+			System.out.println(" 5 - Refeições");
 			System.out.println(" 6 - Conquistas");
-	    	System.out.println(" 0 - Voltar ao menu principal");
+	    	System.out.println(" 0 - Voltar ao menu de login");
 	    	System.out.print("Opção: ");
 	    	
 	    	String resposta = sc.nextLine();
@@ -72,10 +73,10 @@ public class Menu {
 				System.out.println("\nEm Construção");
 				break;
 			case "4":
-				System.out.println("\nEm Construção");
+				menuExercicios(usuario, sc);
 				break;
 			case "5":
-				System.out.println("\nEm Construção");
+				menuRefeicoes(usuario, sc);
 				break;
 			case "6":
 				System.out.println("\nEm Construção");
@@ -94,6 +95,140 @@ public class Menu {
 			}
     	}
     }
+	
+	public void menuExercicios(Usuario usuario, Scanner sc) {
+    	boolean continuar = true;
+    	int idExercicio;
+    	
+    	while (continuar) {
+    	
+			System.out.println("\n -------------------------------- \n         Menu Exercícios\n --------------------------------");
+			System.out.println(" 1 - Cadastrar exercício");
+			System.out.println(" 2 - Alterar exercício");
+			System.out.println(" 3 - Excluir exercício");
+			System.out.println(" 4 - Mostrar um exercício");
+	    	System.out.println(" 0 - Voltar ao menu principal");
+	    	System.out.print("Opção: ");
+	    	
+	    	String resposta = sc.nextLine();
+			
+			switch (resposta) {
+			
+			case "1":
+				if(funcoes.cadastrarExercicio(usuario, sc)) {
+					System.out.println("\nCadastro realizado com sucesso!");
+				} else {
+					System.out.println("\nErro ao cadastrar exercício!");
+				}
+				break;
+			case "2":
+				System.out.println("Id do exercício:");
+	            idExercicio = sc.nextInt();
+	            sc.nextLine();
+				if(funcoes.alterarExercicio(usuario, idExercicio)) {
+					System.out.println("\nAlteração realizada com sucesso!");
+				} else {
+					System.out.println("\nErro ao alterar exercício!");
+				}
+				break;
+			case "3":
+				System.out.println("Id do exercício:");
+	            idExercicio = sc.nextInt();
+	            sc.nextLine();
+				if(funcoes.excluirExercicio(usuario, idExercicio)) {
+					System.out.println("\nExclusão realizada com sucesso!");
+				} else {
+					System.out.println("\nErro ao excluir exercício!");
+				}
+				break;
+			case "4":
+				System.out.println("Id do exercício:");
+	            idExercicio = sc.nextInt();
+	            sc.nextLine();
+	            Exercicio exercicio = funcoes.buscarExercicio(usuario, idExercicio);
+				if(exercicio != null) {
+					System.out.println(exercicio);
+				} else {
+					System.out.println("\nErro ao encontrar exercício!");
+				}
+				break;
+			case "0":
+				continuar = false;
+				System.out.println("\nSaindo de exercícios...");
+				break;
+			default:
+				System.out.println("\nOpção inválida.");
+			}
+    	}
+    }
+	
+	public void menuRefeicoes(Usuario usuario, Scanner sc) {
+    	boolean continuar = true;
+    	int idRefeicao;
+    	
+    	while (continuar) {
+    	
+			System.out.println("\n -------------------------------- \n         Menu Refeições\n --------------------------------");
+			System.out.println(" 1 - Cadastrar refeição");
+			System.out.println(" 2 - Alterar refeição");
+			System.out.println(" 3 - Excluir refeição");
+			System.out.println(" 4 - Mostrar um refeição");
+	    	System.out.println(" 0 - Voltar ao menu principal");
+	    	System.out.print("Opção: ");
+	    	
+	    	String resposta = sc.nextLine();
+			
+			switch (resposta) {
+			
+			case "1":
+				if(funcoes.cadastrarRefeicao(usuario, sc)) {
+					System.out.println("\nCadastro realizado com sucesso!");
+				} else {
+					System.out.println("\nErro ao cadastrar refeição!");
+				}
+				break;
+			case "2":
+				System.out.println("Id da refeição:");
+				idRefeicao = sc.nextInt();
+	            sc.nextLine();
+	            System.out.println("Nome da refeição:");
+				String nome = sc.nextLine();
+				if(funcoes.alterarRefeicao(usuario, idRefeicao, nome, sc)) {
+					System.out.println("\nExclusão realizada com sucesso!");
+				} else {
+					System.out.println("\nErro ao excluir refeição!");
+				}
+				break;
+			case "3":
+				System.out.println("Id da refeição:");
+				idRefeicao = sc.nextInt();
+	            sc.nextLine();
+				if(funcoes.excluirRefeicao(usuario, idRefeicao)) {
+					System.out.println("\nExclusão realizada com sucesso!");
+				} else {
+					System.out.println("\nErro ao excluir refeição!");
+				}
+				break;
+			case "4":
+				System.out.println("Id da receita:");
+				idRefeicao = sc.nextInt();
+	            sc.nextLine();
+	            Refeicao refeicao = funcoes.buscarRefeicao(usuario, idRefeicao);
+				if(refeicao != null) {
+					System.out.println(refeicao);
+				} else {
+					System.out.println("\nErro ao encontrar refeição!");
+				}
+				break;
+			case "0":
+				continuar = false;
+				System.out.println("\nSaindo de refeições...");
+				break;
+			default:
+				System.out.println("\nOpção inválida.");
+			}
+    	}
+	}
 	
 	public void fazerLogin(Scanner sc) {
         System.out.print("Email: ");

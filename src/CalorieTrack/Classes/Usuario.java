@@ -15,7 +15,9 @@ public class Usuario {
 	private int idade;
 	private String sexo;
 	private double metacalorica;
-	ArrayList<Refeicao> refeicoes= new ArrayList();
+	private ArrayList<Exercicio> exercicios = new ArrayList<>();
+	private ArrayList<Refeicao> refeicoes = new ArrayList<>();
+	
 	public Usuario() {
 		ULTIMOIDUSUARIO++;
 	}
@@ -94,7 +96,21 @@ public class Usuario {
 	public void setMetacalorica(double metacalorica) {
 		this.metacalorica = metacalorica;
 	}
+	
+	public ArrayList<Exercicio> getExercicios() {
+		return exercicios;
+	}
+	public void setExercicios(ArrayList<Exercicio> exercicios) {
+		this.exercicios = exercicios;
+	}
 
+	public ArrayList<Refeicao> getRefeicoes() {
+		return refeicoes;
+	}
+	public void setRefeicoes(ArrayList<Refeicao> refeicoes) {
+		this.refeicoes = refeicoes;
+	}
+	
 	public Usuario criarUsuario(Scanner sc) {		
 		System.out.println("Nome:");
 		String nome = sc.nextLine();
@@ -160,7 +176,23 @@ public class Usuario {
 		
 		return new Usuario(nome, email, senha, peso, altura, idade, sexo, metacalorica);
 	}
-
+	
+	public void addExercicio(Exercicio exe) {
+		exercicios.add(exe);
+	}
+	
+	public void removeExercicio(Exercicio exe) {
+		exercicios.remove(exe);
+	}
+	
+	public void addRefeicao(Refeicao ref) {
+		refeicoes.add(ref);
+	}
+	
+	public void removeRefeicao(Refeicao ref) {
+		refeicoes.remove(ref);
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nome=" + nome + ", email=" + email + ", senha=" + senha
