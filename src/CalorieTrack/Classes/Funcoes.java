@@ -99,18 +99,34 @@ public class Funcoes {
 	    return false;
 	}
 	
-	public boolean alterarExercicio(Usuario usuario, int id) {
-		ArrayList<Exercicio> exercicios = usuario.getExercicios();
-		for (Exercicio e : exercicios) {
-			if (e.getIdExercicio() == id) {
-				e.setTipo(e.getTipo());
-				e.setIntensidade(e.getIntensidade());
-				e.setDuracao(e.getDuracao());
-				e.setCaloriasGastas(e.getCaloriasGastas());
-				return true;
+	public boolean alterarExercicio(Usuario usuario, int id, Exercicio novoExercicio) {
+		try {
+			Exercicio exercicioEncontrado = null;
+			for (Exercicio e : usuario.getExercicios()) {
+                if (e != null && e.getIdExercicio() == id) {
+                	exercicioEncontrado = e;
+                    break;
+                }
+            }
+		
+			if (novoExercicio.getNome() != null && !novoExercicio.getNome().isBlank()) {
+				exercicioEncontrado.setNome(exercicioEncontrado.getNome());
 			}
+			if (novoExercicio.getIntensidade() != null && !novoExercicio.getIntensidade().isBlank()) {
+				exercicioEncontrado.setIntensidade(exercicioEncontrado.getIntensidade());
+			}
+			if (novoExercicio.getDuracao() > 0) {
+				exercicioEncontrado.setDuracao(exercicioEncontrado.getDuracao());
+			}
+			if (novoExercicio.getCaloriasGastas() > 0) {
+				exercicioEncontrado.setCaloriasGastas(exercicioEncontrado.getCaloriasGastas());
+			}
+			return true;
+			
+		} catch (Exception e) {
+			return false;
 		}
-		return false; 
+	
 	}
 	
 	//REFEIÇÕES
@@ -149,18 +165,27 @@ public class Funcoes {
 	    return false;
 	}
 	
-	public boolean alterarRefeicao(Usuario usuario, int id, String nome, Scanner sc) {
-		ArrayList<Refeicao> refeicoes = usuario.getRefeicoes();
-		for (Refeicao r : refeicoes) {
-			if (r.getIdRefeicao() == id) {
-				r.setNomeRefeicao(r.getNomeRefeicao());
-				r.setHorario(r.getHorario());
-				r.alterarAlimentos(sc, nome);
-				
-				return true;
+	public boolean alterarRefeicao(Usuario usuario, int id, Refeicao novaRefeicao) {
+		try {
+			Refeicao refeicaoEncontrada = null;
+			for (Refeicao r : usuario.getRefeicoes()) {
+                if (r != null && r.getIdRefeicao() == id) {
+                	refeicaoEncontrada = r;
+                    break;
+                }
+            }
+		
+			if (novaRefeicao.getNomeRefeicao() != null && !novaRefeicao.getNomeRefeicao().isBlank()) {
+				refeicaoEncontrada.setNomeRefeicao(refeicaoEncontrada.getNomeRefeicao());
 			}
+			if (novaRefeicao.getHorario() != null && !novaRefeicao.getHorario().isBlank()) {
+				refeicaoEncontrada.setHorario(refeicaoEncontrada.getHorario());
+			}
+			return true;
+			
+		} catch (Exception e) {
+			return false;
 		}
-		return false; 
 	}
 
 }

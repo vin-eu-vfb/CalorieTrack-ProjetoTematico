@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Exercicio {
 	private static int ULTIMOEXERCICIO = 0;
 	private int idExercicio;
-	private String tipo;
+	private String nome;
 	private double duracao;
 	private String intensidade;
 	private double caloriasGastas;
@@ -15,9 +15,9 @@ public class Exercicio {
 		ULTIMOEXERCICIO++;
 	}
 	
-	public Exercicio(String tipo, double duracao, String intensidade, double caloriasGastas) {
+	public Exercicio(String nome, double duracao, String intensidade, double caloriasGastas) {
 		this.idExercicio = ULTIMOEXERCICIO;
-		this.tipo = tipo;
+		this.nome = nome;
 		this.duracao = duracao;
 		this.intensidade = intensidade;
 		this.caloriasGastas = caloriasGastas;
@@ -30,13 +30,13 @@ public class Exercicio {
 		this.idExercicio = idExercicio;
 	}
 	
-	public String getTipo() {
-		return tipo;
+	public String getNome() {
+		return nome;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	
+
 	public double getDuracao() {
 		return duracao;
 	}
@@ -61,9 +61,9 @@ public class Exercicio {
 	public Exercicio criarExercicio(Scanner sc) {
 		
 		System.out.println("Digite o nome do exercicio:");
-		String nome=sc.nextLine();
+		this.nome = sc.nextLine();
 		System.out.println("Digite a intensidade:");
-		String intensidade=sc.nextLine();
+		this.intensidade = sc.nextLine();
 		
 		 double duracao = 0;
 		    while (true) {
@@ -92,7 +92,7 @@ public class Exercicio {
 	
 	@Override
 	public String toString() {
-		return "Exercicio [idExercicio=" + idExercicio + ", tipo=" + tipo + ", duracao=" + duracao + ", intensidade="
+		return "Exercicio [idExercicio=" + idExercicio + ", nome=" + nome + ", duracao=" + duracao + ", intensidade="
 				+ intensidade + ", caloriasGastas=" + caloriasGastas + "]";
 	}
 	

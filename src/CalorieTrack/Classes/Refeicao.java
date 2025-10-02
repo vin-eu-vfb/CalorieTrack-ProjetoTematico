@@ -113,7 +113,7 @@ public class Refeicao {
 
 	@Override
 	public String toString() {
-		return "Refeicao [idRefeicao=" + idRefeicao + ", nomeRefeicao=" + nomeRefeicao + ", alimentos1="
+		return "Refeicao [idRefeicao=" + idRefeicao + ", nomeRefeicao=" + nomeRefeicao + ", alimentos="
 				+ alimentos + ", horario=" + horario + "]";
 	}
 	

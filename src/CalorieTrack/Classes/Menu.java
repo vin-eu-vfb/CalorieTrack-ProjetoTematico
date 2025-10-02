@@ -1,14 +1,18 @@
 package CalorieTrack.Classes;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
 	
-	private static Funcoes funcoes = new Funcoes();
-	private static Menu menu = new Menu();
+	private Funcoes funcoes;
+	
+	public Menu() {
+		this.funcoes  = new Funcoes();
+	}
 
 	public static void main(String[] args) {
+		Menu m = new Menu();
+		
 		Scanner sc = new Scanner(System.in);
 		boolean continuar = true;
 		
@@ -23,14 +27,14 @@ public class Menu {
 			
 			switch (resposta) {
 			case "1":
-				if(funcoes.cadastrarUsuario(sc)) {
+				if(m.funcoes.cadastrarUsuario(sc)) {
 					System.out.println("\nUsuário cadastrado com sucesso!");
 				} else {
 					System.out.println("\nErro no cadastro do cliente!");
 				}
 				break;
 			case "2":
-				menu.fazerLogin(sc);
+				m.fazerLogin(sc);
 				break;
 			case "0":
 				continuar = false;
@@ -125,7 +129,33 @@ public class Menu {
 				System.out.println("Id do exercício:");
 	            idExercicio = sc.nextInt();
 	            sc.nextLine();
-				if(funcoes.alterarExercicio(usuario, idExercicio)) {
+	            
+	            Exercicio novoExercicio = funcoes.buscarExercicio(usuario, idExercicio);
+	            
+	            System.out.println("Digite o novo nome do exercício (ou deixe em branco para manter): ");
+				String nome = sc.nextLine();
+				if (!nome.isBlank()) {
+					novoExercicio.setNome(nome);
+				}
+				System.out.println("Digite a nova intensidade do exercício (ou deixe em branco para manter): ");
+				String intensidade = sc.nextLine();
+				if (!intensidade.isBlank()) {
+					novoExercicio.setIntensidade(intensidade);
+				}
+				System.out.println("Digite a nova duração do exercício: ");
+				Double duracao = sc.nextDouble();
+				sc.nextLine();
+				if (duracao > 0) {
+					novoExercicio.setDuracao(duracao);
+				}
+				System.out.println("Digite o novo valor para calorias gastas do exercício: ");
+				Double calorias = sc.nextDouble();
+				sc.nextLine();
+				if (calorias > 0) {
+					novoExercicio.setCaloriasGastas(calorias);
+				}
+				
+				if(funcoes.alterarExercicio(usuario, idExercicio, novoExercicio)) {
 					System.out.println("\nAlteração realizada com sucesso!");
 				} else {
 					System.out.println("\nErro ao alterar exercício!");
@@ -135,10 +165,15 @@ public class Menu {
 				System.out.println("Id do exercício:");
 	            idExercicio = sc.nextInt();
 	            sc.nextLine();
-				if(funcoes.excluirExercicio(usuario, idExercicio)) {
-					System.out.println("\nExclusão realizada com sucesso!");
-				} else {
-					System.out.println("\nErro ao excluir exercício!");
+	            Exercicio exercicio2 = funcoes.buscarExercicio(usuario, idExercicio);
+				System.out.println("Deseja mesmo excluir o exercício: " + exercicio2 + "? (s/n)");
+				String confirmacao = sc.nextLine();
+				if ("s".equals(confirmacao) || "sim".equals(confirmacao) || "S".equals(confirmacao)) {
+					if(funcoes.excluirExercicio(usuario, idExercicio)) {
+						System.out.println("\nExclusão realizada com sucesso!");
+					} else {
+						System.out.println("\nErro ao excluir exercício!");
+					}
 				}
 				break;
 			case "4":
@@ -189,12 +224,24 @@ public class Menu {
 				break;
 			case "2":
 				System.out.println("Id da refeição:");
-				idRefeicao = sc.nextInt();
+	            idRefeicao = sc.nextInt();
 	            sc.nextLine();
-	            System.out.println("Nome da refeição:");
+	            
+	            Refeicao novaRefeicao = funcoes.buscarRefeicao(usuario, idRefeicao);
+	            
+	            System.out.println("Digite o novo nome da refeição (ou deixe em branco para manter): ");
 				String nome = sc.nextLine();
-				if(funcoes.alterarRefeicao(usuario, idRefeicao, nome, sc)) {
-					System.out.println("\nExclusão realizada com sucesso!");
+				if (!nome.isBlank()) {
+					novaRefeicao.setNomeRefeicao(nome);
+				}
+				System.out.println("Digite o novo horário da refeição (ou deixe em branco para manter): ");
+				String horario = sc.nextLine();
+				if (!horario.isBlank()) {
+					novaRefeicao.setHorario(horario);
+				}
+	            
+				if(funcoes.alterarRefeicao(usuario, idRefeicao, novaRefeicao)) {
+					System.out.println("\nAlteração realizada com sucesso!");
 				} else {
 					System.out.println("\nErro ao excluir refeição!");
 				}
@@ -203,10 +250,15 @@ public class Menu {
 				System.out.println("Id da refeição:");
 				idRefeicao = sc.nextInt();
 	            sc.nextLine();
-				if(funcoes.excluirRefeicao(usuario, idRefeicao)) {
-					System.out.println("\nExclusão realizada com sucesso!");
-				} else {
-					System.out.println("\nErro ao excluir refeição!");
+	            Refeicao refeicao2 = funcoes.buscarRefeicao(usuario, idRefeicao);
+	            System.out.println("Deseja mesmo excluir a refeição: " + refeicao2 + "? (s/n)");
+				String confirmacao = sc.nextLine();
+				if ("s".equals(confirmacao) || "sim".equals(confirmacao) || "S".equals(confirmacao)) {
+					if(funcoes.excluirRefeicao(usuario, idRefeicao)) {
+						System.out.println("\nExclusão realizada com sucesso!");
+					} else {
+						System.out.println("\nErro ao excluir refeição!");
+					}
 				}
 				break;
 			case "4":
