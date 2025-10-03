@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Funcoes {
 	private ArrayList<Usuario> usuarios = new ArrayList<>();
-	ArrayList<Refeicao> refeicoes = new ArrayList<>();
 	
 	public Funcoes() {
 		
@@ -23,7 +22,6 @@ public class Funcoes {
 		
 		for (Usuario u : usuarios) {
             if(u.getEmail().equalsIgnoreCase(novoUsuario.getEmail())) {
-                System.out.println("Erro: Já existe um usuário com este email.");
                 return false;
             }
         }
