@@ -15,8 +15,13 @@ public class Usuario {
 	private int idade;
 	private String sexo;
 	private double metacalorica;
+	private String preferencias;
+	private String configuracoes;
 	private ArrayList<Exercicio> exercicios = new ArrayList<>();
 	private ArrayList<Refeicao> refeicoes = new ArrayList<>();
+	private ArrayList<Receita> receitas = new ArrayList<>();
+	private ArrayList<RegistroCalorias> registros= new ArrayList<>();
+	private ArrayList<Relatorio> relatorios = new ArrayList<>();
 	
 	public Usuario() {
 		ULTIMOIDUSUARIO++;
@@ -111,6 +116,23 @@ public class Usuario {
 		this.refeicoes = refeicoes;
 	}
 	
+	
+	public String getPreferencias() {
+		return preferencias;
+	}
+
+	public void setPreferencias(String preferencias) {
+		this.preferencias = preferencias;
+	}
+
+	public String getConfiguracoes() {
+		return configuracoes;
+	}
+
+	public void setConfiguracoes(String configuracoes) {
+		this.configuracoes = configuracoes;
+	}
+
 	public Usuario criarUsuario(Scanner sc) {		
 		System.out.println("Nome:");
 		String nome = sc.nextLine();
@@ -177,6 +199,15 @@ public class Usuario {
 		return new Usuario(nome, email, senha, peso, altura, idade, sexo, metacalorica);
 	}
 	
+	public void addRegistroDiario(RegistroCalorias reg) {
+	        registros.add(reg);
+	    }
+	
+	public void removeRegistroDiario(RegistroCalorias reg) {
+	        registros.remove(reg);
+	    }
+	
+	
 	public void addExercicio(Exercicio exe) {
 		exercicios.add(exe);
 	}
@@ -192,6 +223,21 @@ public class Usuario {
 	public void removeRefeicao(Refeicao ref) {
 		refeicoes.remove(ref);
 	}
+	public void addReceita(Receita rec) {
+		receitas.add(rec);
+	}
+	public void removeReceita(Receita rec) {
+		receitas.remove(rec);
+	}
+	
+	public void addRelatorio(Relatorio re) {
+		relatorios.add(re);
+	}
+	
+	public void removeRelatorio(Relatorio re) {
+		relatorios.remove(re);
+	}
+	
 	
 	@Override
 	public String toString() {

@@ -6,10 +6,10 @@ public class Refeicao {
 	
 	private int idRefeicao;
 	private String nomeRefeicao;
-	private ArrayList<Alimentos> alimentos= new ArrayList<>();
+	private ArrayList<TabelaNutricional> tabelaNutricional= new ArrayList<>();
 	private String horario;
 	private static int ULTIMAREFEICAO = 0;
-	
+	private Double caloriasTotais;
 	
 	public Refeicao() {
 		ULTIMAREFEICAO++;
@@ -17,10 +17,23 @@ public class Refeicao {
 
 	
 	
-	public Refeicao(String nomeRefeicao, String horario) {
+	public Refeicao(String nomeRefeicao, String horario,Double caloriasTotais) {
 		this.idRefeicao = ULTIMAREFEICAO;
 		this.nomeRefeicao = nomeRefeicao;	
 		this.horario = horario;
+		this.caloriasTotais= caloriasTotais;
+	}
+
+
+
+	public Double getCaloriasTotais() {
+		return caloriasTotais;
+	}
+
+
+
+	public void setCaloriasTotais(Double caloriasTotais) {
+		this.caloriasTotais = caloriasTotais;
 	}
 
 
@@ -49,11 +62,11 @@ public class Refeicao {
 
 
 
-	public ArrayList<Alimentos> getAlimentos1() {
-		return alimentos;
+	public ArrayList<TabelaNutricional> getAlimentos1() {
+		return tabelaNutricional;
 	}
-	public void setAlimentos1(ArrayList<Alimentos> alimentos1) {
-		this.alimentos = alimentos1;
+	public void setAlimentos1(ArrayList<TabelaNutricional> alimentos1) {
+		this.tabelaNutricional = alimentos1;
 	}
 
 
@@ -67,6 +80,10 @@ public class Refeicao {
 		    System.out.println("Informe o horario em HH:MM");
 		    horario=sc.nextLine();
 		    
+		    for(TabelaNutricional a: tabelaNutricional) {
+		    	caloriasTotais= a.getCalorias();
+		    }
+		    
 		   // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 		    
 		    //try {
@@ -78,18 +95,18 @@ public class Refeicao {
 	     //   } catch (DateTimeParseException e) {
 	      //      System.out.println("Formato inválido! Use HH:mm.");
 	       // }
-		 return new Refeicao(nome,horario);
+		 return new Refeicao(nome,horario,caloriasTotais);
 	}
-	public boolean associarAlimentos(Scanner sc,Alimentos a){
+	public boolean associarAlimentos(Scanner sc,TabelaNutricional a){
 		a.criarAlimentos(sc);
-		return alimentos.add(a);
+		return tabelaNutricional.add(a);
 //lembrar de corrigir possiveis erros
 	}
 	public boolean alterarAlimentos(Scanner sc, String nome) {
 		String nomeAux;
 		Double calorias;
 		Double quantidade;
-		for(Alimentos al: alimentos) {
+		for(TabelaNutricional al: tabelaNutricional) {
 			if(al.getNome().equalsIgnoreCase(nome)) {
 				System.out.println("Digite o novo nome");
 				nomeAux=sc.nextLine();
@@ -109,12 +126,12 @@ public class Refeicao {
 		}
 		return false;
 	}
-
+	
 
 	@Override
 	public String toString() {
-		return "Refeicao [idRefeicao=" + idRefeicao + ", nomeRefeicao=" + nomeRefeicao + ", alimentos="
-				+ alimentos + ", horario=" + horario + "]";
+		return "Refeicao [idRefeicao=" + idRefeicao + ", nomeRefeicao=" + nomeRefeicao + ", tabelaNutricional="
+				+ tabelaNutricional + ", horario=" + horario + "]";
 	}
 	
 	
