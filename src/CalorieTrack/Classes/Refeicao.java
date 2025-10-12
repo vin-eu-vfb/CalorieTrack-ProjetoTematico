@@ -102,10 +102,13 @@ public class Refeicao {
 		return tabelaNutricional.add(a);
 //lembrar de corrigir possiveis erros
 	}
-	public boolean alterarAlimentos(Scanner sc, String nome) {
+	public boolean alterarTabelaNutricional(Scanner sc, String nome) {
 		String nomeAux;
-		Double calorias;
-		Double quantidade;
+		double calorias=0.0;
+		double quantidade=0.0;
+		double proteinas=0.0;
+		double gorduras=0.0;
+		double carboidratos=0.0;
 		for(TabelaNutricional al: tabelaNutricional) {
 			if(al.getNome().equalsIgnoreCase(nome)) {
 				System.out.println("Digite o novo nome");
@@ -119,6 +122,18 @@ public class Refeicao {
 				System.out.println("Digite a quantidade em gramas");
 				quantidade= sc.nextDouble();
 				al.setQuantidade(quantidade);
+				sc.nextLine();
+				System.out.println("Digite o n° de proteinas a cada 100g");
+				proteinas= sc.nextDouble();
+				al.setProteinas(proteinas);
+				sc.nextLine();
+				System.out.println("Digite o n° de gorduras a cada 100g");
+				gorduras= sc.nextDouble();
+				al.setGorduras(gorduras);
+				sc.nextLine();
+				System.out.println("Digite o n° de carboidratos a cada 100g");
+				carboidratos= sc.nextDouble();
+				al.setCarboidratos(carboidratos);
 				sc.nextLine();
 				
 				return true;

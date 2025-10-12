@@ -4,5 +4,6 @@
 /**
  * 
  */
-module CalorieTrack1 {
+module CalorieTrack2 {
+	requires java.sql;
 }

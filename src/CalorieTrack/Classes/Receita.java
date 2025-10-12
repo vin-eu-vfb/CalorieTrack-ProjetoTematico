@@ -48,7 +48,7 @@ public class Receita {
 	}
 	public Receita criarReceita(Scanner sc) {
 		String nome;
-		Double caloriasTotais=0.0;
+		double caloriasTotais=0;
 		System.out.println("Digite o nome da receita:");
 		nome= sc.nextLine();
 		String resposta;
