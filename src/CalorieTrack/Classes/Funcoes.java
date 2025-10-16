@@ -1,5 +1,9 @@
 package CalorieTrack.Classes;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,26 +24,91 @@ public class Funcoes {
             return false;
         }
 		
-		for (Usuario u : usuarios) {
-            if(u.getEmail().equalsIgnoreCase(novoUsuario.getEmail())) {
-                return false;
-            }
-        }
+		return cadastrarUsuario(novoUsuario);
+	}
+	
+	public boolean cadastrarUsuario(Usuario novoUsuario) {
+		if (novoUsuario == null) {
+			return false;
+		}
 		
-		usuarios.add(novoUsuario);
-        return true;
+		Connection conn = ConexaoBD.conectar();
+		
+		try {
+			String sqlVerifica = "SELECT id_usuario FROM Usuario WHERE email = ?";
+			PreparedStatement psVerifica = conn.prepareStatement(sqlVerifica);
+			psVerifica.setString(1, novoUsuario.getEmail());
+			ResultSet rs = psVerifica.executeQuery();
+			
+			if (rs.next()) {
+				System.out.println("Email já cadastrado!");
+				return false;
+			}
+			
+			String sql = "INSERT INTO Usuario (nome, email, senha, peso, altura, idade, sexo, meta_calorica) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, novoUsuario.getNome());
+			ps.setString(2, novoUsuario.getEmail());
+			ps.setString(3, novoUsuario.getSenha());
+			ps.setDouble(4, novoUsuario.getPeso());
+			ps.setDouble(5, novoUsuario.getAltura());
+			ps.setInt(6, novoUsuario.getIdade());
+			ps.setString(7, novoUsuario.getSexo());
+			ps.setDouble(8, novoUsuario.getMetacalorica());
+			
+			int linhasAfetadas = ps.executeUpdate();
+			
+			if (linhasAfetadas > 0) {
+				System.out.println("Usuário cadastrado no banco de dados com sucesso!");
+				usuarios.add(novoUsuario); 
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao cadastrar no banco: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			ConexaoBD.fecharConexao(conn);
+		}
+		
+		return false;
 	}
 	
 	public Usuario buscarUsuario(String login, String senha) {
-			for (Usuario u : usuarios) {
-				if (u != null) {
-					if(u.getEmail().equals(login) && u.getSenha().equals(senha)) {
-						return u;
-					}
+		Connection conn = ConexaoBD.conectar();
+		
+		if (conn != null) {
+			try {
+				String sql = "SELECT * FROM Usuario WHERE email = ? AND senha = ?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, login);
+				ps.setString(2, senha);
+				
+				ResultSet rs = ps.executeQuery();
+				
+				if (rs.next()) {
+					Usuario usuario = new Usuario();
+					usuario.setIdUsuario(rs.getInt("id_usuario"));
+					usuario.setNome(rs.getString("nome"));
+					usuario.setEmail(rs.getString("email"));
+					usuario.setSenha(rs.getString("senha"));
+					usuario.setPeso(rs.getDouble("peso"));
+					usuario.setAltura(rs.getDouble("altura"));
+					usuario.setIdade(rs.getInt("idade"));
+					usuario.setSexo(rs.getString("sexo"));
+					usuario.setMetacalorica(rs.getDouble("meta_calorica"));
 					
+					System.out.println("Usuário encontrado no banco de dados!");
+					return usuario;
 				}
+				
+			} catch (SQLException e) {
+				System.out.println("Erro ao buscar usuário no banco: " + e.getMessage());
+			} finally {
+				ConexaoBD.fecharConexao(conn);
 			}
-			return null;
+		}
+		return null;
 	}
 	
 	public boolean alterarUsuario(int codigo, Usuario usuarioparaalterar) {

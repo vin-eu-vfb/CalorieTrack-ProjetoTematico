@@ -5,7 +5,7 @@ CREATE TABLE Usuario (
     email VARCHAR(150) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
     peso DECIMAL(5,2) NOT NULL,
-    altura DECIMAL(3,2) NOT NULL,
+    altura DECIMAL(5,2) NOT NULL,
     idade INT NOT NULL,
     sexo VARCHAR(10) NOT NULL,
     meta_calorica DECIMAL(7,2) NOT NULL,

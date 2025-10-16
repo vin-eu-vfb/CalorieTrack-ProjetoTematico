@@ -283,18 +283,30 @@ public class Menu {
 	}
 	
 	public void fazerLogin(Scanner sc) {
-        System.out.print("Email: ");
-        String login = sc.nextLine();
-        System.out.print("Senha: ");
-        String senha = sc.nextLine();
+        
+   
+            System.out.print("Email: ");
+            String login = sc.nextLine().trim();
+            
+            if (login.isEmpty()) {
+                System.out.println("Email não pode estar vazio. Tente novamente.\n");
+            }
+            
+            System.out.print("Senha: ");
+            String senha = sc.nextLine().trim();
+            
+            if (senha.isEmpty()) {
+                System.out.println("Senha não pode estar vazia. Tente novamente.\n");
+            }
 
-        Usuario usuario = funcoes.buscarUsuario(login, senha);
+            Usuario usuario = funcoes.buscarUsuario(login, senha);
 
-        if (usuario != null) {
-        	menuUsuario(usuario, sc);
-        } else {
-            System.out.println("\nErro: Login ou senha incorretos ou não encontrados");
-        }
+            if (usuario != null) {
+                menuUsuario(usuario, sc);
+                return;
+            } else {
+                
+            }
     }
 	
 }
