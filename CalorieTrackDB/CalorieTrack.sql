@@ -359,19 +359,21 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuario` (
-  `idUsuario` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `senha` varchar(50) DEFAULT NULL,
-  `altura` double DEFAULT NULL,
-  `peso` double DEFAULT NULL,
-  `idade` int DEFAULT NULL,
-  `metacalorica` double DEFAULT NULL,
-  `sexo` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`idUsuario`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE Usuario (
+    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    peso DECIMAL(5,2) NOT NULL,
+    altura DECIMAL(5,2) NOT NULL,
+    idade INT NOT NULL,
+    sexo VARCHAR(10) NOT NULL,
+    meta_calorica DECIMAL(7,2) NOT NULL,
+    tipo_usuario ENUM('USUARIO', 'ADMIN') DEFAULT 'USUARIO',
+    ativo BOOLEAN DEFAULT TRUE,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    UNIQUE KEY `email` (`email`)
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
