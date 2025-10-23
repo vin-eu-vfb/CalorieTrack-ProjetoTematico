@@ -83,7 +83,8 @@ public class MainApp extends Application {
                 tentativasLogin = 0;
                 mostrarMensagem(mensagem, "Login realizado com sucesso! Bem-vindo(a), " + usuario.getNome() + "!", "sucesso");
                 
-                
+            abrirTelaMenu(primaryStage, usuario);
+            
             } else {
                 tentativasLogin++;
                 int tentativasRestantes = MAX_TENTATIVAS - tentativasLogin;
@@ -121,6 +122,187 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
+    
+    private void abrirTelaMenu(Stage stage, Usuario usuario) {
+        ImageView logo = new ImageView();
+        File logoFile = new File("interface/src/logo.png");
+        if (logoFile.exists()) {
+            Image logoImage = new Image(logoFile.toURI().toString());
+            logo.setImage(logoImage);
+            logo.setFitWidth(100);
+            logo.setFitHeight(100);
+            logo.setPreserveRatio(true);
+        }
+        
+        Label bemVindo = new Label("Olá, " + usuario.getNome() + "!");
+        bemVindo.setStyle(
+            "-fx-font-size: 24px; " +
+            "-fx-font-weight: bold; " +
+            "-fx-text-fill: #2C3E50;"
+        );
+        
+        Label subtitulo = new Label("O que você gostaria de fazer?");
+        subtitulo.setStyle(
+            "-fx-font-size: 14px; " +
+            "-fx-text-fill: #7F8C8D;"
+        );
+        
+        String baseButtonStyle = 
+            "-fx-background-radius: 12px; " +
+            "-fx-cursor: hand; " +
+            "-fx-font-size: 15px; " +
+            "-fx-font-weight: 600; " +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);";
+        
+        Button btnConsultarAlimentos = new Button("🍎 Consultar Alimentos");
+        btnConsultarAlimentos.setPrefWidth(380);
+        btnConsultarAlimentos.setPrefHeight(65);
+        btnConsultarAlimentos.setStyle(
+            baseButtonStyle +
+            "-fx-background-color: #3498DB; " +
+            "-fx-text-fill: white;"
+        );
+        btnConsultarAlimentos.setOnMouseEntered(e -> 
+            btnConsultarAlimentos.setStyle(baseButtonStyle + "-fx-background-color: #2980B9; -fx-text-fill: white;")
+        );
+        btnConsultarAlimentos.setOnMouseExited(e -> 
+            btnConsultarAlimentos.setStyle(baseButtonStyle + "-fx-background-color: #3498DB; -fx-text-fill: white;")
+        );
+        
+        Button btnRegistrarRefeicao = new Button("🍽️ Registrar Refeição");
+        btnRegistrarRefeicao.setPrefWidth(380);
+        btnRegistrarRefeicao.setPrefHeight(65);
+        btnRegistrarRefeicao.setStyle(
+            baseButtonStyle +
+            "-fx-background-color: #27AE60; " +
+            "-fx-text-fill: white;"
+        );
+        btnRegistrarRefeicao.setOnMouseEntered(e -> 
+            btnRegistrarRefeicao.setStyle(baseButtonStyle + "-fx-background-color: #229954; -fx-text-fill: white;")
+        );
+        btnRegistrarRefeicao.setOnMouseExited(e -> 
+            btnRegistrarRefeicao.setStyle(baseButtonStyle + "-fx-background-color: #27AE60; -fx-text-fill: white;")
+        );
+        
+        Button btnRegistrarAtividade = new Button("🏃 Registrar Atividade");
+        btnRegistrarAtividade.setPrefWidth(380);
+        btnRegistrarAtividade.setPrefHeight(65);
+        btnRegistrarAtividade.setStyle(
+            baseButtonStyle +
+            "-fx-background-color: #E67E22; " +
+            "-fx-text-fill: white;"
+        );
+        btnRegistrarAtividade.setOnMouseEntered(e -> 
+            btnRegistrarAtividade.setStyle(baseButtonStyle + "-fx-background-color: #D35400; -fx-text-fill: white;")
+        );
+        btnRegistrarAtividade.setOnMouseExited(e -> 
+            btnRegistrarAtividade.setStyle(baseButtonStyle + "-fx-background-color: #E67E22; -fx-text-fill: white;")
+        );
+        
+        Button btnSugerirAlimento = new Button("💡 Sugerir Alimento");
+        btnSugerirAlimento.setPrefWidth(380);
+        btnSugerirAlimento.setPrefHeight(65);
+        btnSugerirAlimento.setStyle(
+            baseButtonStyle +
+            "-fx-background-color: #9B59B6; " +
+            "-fx-text-fill: white;"
+        );
+        btnSugerirAlimento.setOnMouseEntered(e -> 
+            btnSugerirAlimento.setStyle(baseButtonStyle + "-fx-background-color: #8E44AD; -fx-text-fill: white;")
+        );
+        btnSugerirAlimento.setOnMouseExited(e -> 
+            btnSugerirAlimento.setStyle(baseButtonStyle + "-fx-background-color: #9B59B6; -fx-text-fill: white;")
+        );
+        
+        Button btnConquista = new Button("🏆 Conquistas");
+        btnConquista.setPrefWidth(380);
+        btnConquista.setPrefHeight(65);
+        btnConquista.setStyle(
+            baseButtonStyle +
+            "-fx-background-color: #F39C12; " +
+            "-fx-text-fill: white;"
+        );
+        btnConquista.setOnMouseEntered(e -> 
+            btnConquista.setStyle(baseButtonStyle + "-fx-background-color: #E67E22; -fx-text-fill: white;")
+        );
+        btnConquista.setOnMouseExited(e -> 
+            btnConquista.setStyle(baseButtonStyle + "-fx-background-color: #F39C12; -fx-text-fill: white;")
+        );
+        
+        btnConsultarAlimentos.setOnAction(e -> {
+            abrirTelaDesenvolvimento(stage, usuario, "Consultar Alimentos");
+        });
+        
+        btnRegistrarRefeicao.setOnAction(e -> {
+            abrirTelaDesenvolvimento(stage, usuario, "Registrar Refeição");
+        });
+        
+        btnRegistrarAtividade.setOnAction(e -> {
+            abrirTelaDesenvolvimento(stage, usuario, "Registrar Atividade");
+        });
+        
+        btnSugerirAlimento.setOnAction(e -> {
+            abrirTelaDesenvolvimento(stage, usuario, "Sugerir Alimento");
+        });
+        
+        btnConquista.setOnAction(e -> {
+            abrirTelaDesenvolvimento(stage, usuario, "Conquistas");
+        });
+        
+        VBox header = new VBox(8);
+        header.setAlignment(Pos.CENTER);
+        header.getChildren().addAll(logo, bemVindo, subtitulo);
+        
+        VBox buttonsContainer = new VBox(16);
+        buttonsContainer.setAlignment(Pos.CENTER);
+        buttonsContainer.setPadding(new Insets(20, 0, 0, 0));
+        buttonsContainer.getChildren().addAll(
+            btnConsultarAlimentos,
+            btnRegistrarRefeicao,
+            btnRegistrarAtividade,
+            btnSugerirAlimento,
+            btnConquista
+        );
+        
+        VBox root = new VBox(25);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(40, 35, 40, 35));
+        root.setStyle("-fx-background-color: linear-gradient(to bottom, #F8F9FA 0%, #FFFFFF 100%);");
+        root.getChildren().addAll(header, buttonsContainer);
+        
+        Scene scene = new Scene(root, 550, 800);
+        stage.setTitle("Menu Principal - CalorieTrack");
+        stage.setScene(scene);
+    }
+    
+    private void abrirTelaDesenvolvimento(Stage stage, Usuario usuario, String titulo) {
+        ImageView imageView = new ImageView();
+        File imgFile = new File("interface/src/desenvolvimento.png");
+        if (imgFile.exists()) {
+            Image image = new Image(imgFile.toURI().toString());
+            imageView.setImage(image);
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(420);
+        }
+        
+        Label labelTitulo = new Label(titulo);
+        labelTitulo.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;");
+        
+        Button btnVoltar = new Button("Voltar");
+        btnVoltar.setPrefWidth(200);
+        btnVoltar.setStyle("-fx-background-color: #34495E; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10px;");
+        btnVoltar.setOnAction(e -> abrirTelaMenu(stage, usuario));
+        
+        VBox root = new VBox(20);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(40));
+        root.setStyle("-fx-background-color: linear-gradient(to bottom, #F8F9FA 0%, #FFFFFF 100%);");
+        root.getChildren().addAll(labelTitulo, imageView, btnVoltar);
+        
+        Scene scene = new Scene(root, 550, 800);
+        stage.setTitle("Em desenvolvimento - " + titulo);
+        stage.setScene(scene);
+    }
     
     private void abrirTelaCadastro(Stage stage) {
         Label titulo = new Label("Cadastro de Usuário");
