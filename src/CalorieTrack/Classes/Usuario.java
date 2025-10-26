@@ -15,13 +15,13 @@ public class Usuario {
 	private int idade;
 	private String sexo;
 	private double metacalorica;
-	private String preferencias;
-	private String configuracoes;
 	private ArrayList<Exercicio> exercicios = new ArrayList<>();
 	private ArrayList<Refeicao> refeicoes = new ArrayList<>();
 	private ArrayList<Receita> receitas = new ArrayList<>();
 	private ArrayList<RegistroCalorias> registros= new ArrayList<>();
 	private ArrayList<Relatorio> relatorios = new ArrayList<>();
+	private ArrayList<Perfil> perfil= new ArrayList<>();
+	private ArrayList<Conquista> conquista= new ArrayList<>();
 	
 	public Usuario() {
 		ULTIMOIDUSUARIO++;
@@ -117,21 +117,7 @@ public class Usuario {
 	}
 	
 	
-	public String getPreferencias() {
-		return preferencias;
-	}
-
-	public void setPreferencias(String preferencias) {
-		this.preferencias = preferencias;
-	}
-
-	public String getConfiguracoes() {
-		return configuracoes;
-	}
-
-	public void setConfiguracoes(String configuracoes) {
-		this.configuracoes = configuracoes;
-	}
+	
 
 	public Usuario criarUsuario(Scanner sc) {		
 		System.out.println("Nome:");

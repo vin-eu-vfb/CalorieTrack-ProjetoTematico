@@ -27,6 +27,28 @@ public class RegistroCalorias {
 		 this.idRegistro=ULTIMOREGISTRO;
 		 calcularTotais();
 }
+	 
+	 
+	 
+	public ArrayList<Refeicao> getRefeicoes() {
+		return refeicoes;
+	}
+
+
+	public void setRefeicoes(ArrayList<Refeicao> refeicoes) {
+		this.refeicoes = refeicoes;
+	}
+
+
+	public ArrayList<Exercicio> getExercicios() {
+		return exercicios;
+	}
+
+
+	public void setExercicios(ArrayList<Exercicio> exercicios) {
+		this.exercicios = exercicios;
+	}
+
 
 	public int getIdRegistro() {
 		return idRegistro;

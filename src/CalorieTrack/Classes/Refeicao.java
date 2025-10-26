@@ -23,6 +23,19 @@ public class Refeicao {
 		this.horario = horario;
 		this.caloriasTotais= caloriasTotais;
 	}
+	
+	
+
+
+	public ArrayList<TabelaNutricional> getTabelaNutricional() {
+		return tabelaNutricional;
+	}
+
+
+
+	public void setTabelaNutricional(ArrayList<TabelaNutricional> tabelaNutricional) {
+		this.tabelaNutricional = tabelaNutricional;
+	}
 
 
 

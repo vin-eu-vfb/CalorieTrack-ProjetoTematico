@@ -58,6 +58,7 @@ public class Exercicio {
 		this.caloriasGastas = caloriasGastas;
 	}
 	
+	
 	public Exercicio criarExercicio(Scanner sc) {
 		
 		System.out.println("Digite o nome do exercicio:");

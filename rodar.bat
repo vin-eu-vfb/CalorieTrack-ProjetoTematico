@@ -5,7 +5,7 @@ echo ========================================
 echo.
 
 REM Definir caminhos
-set JAVAFX_PATH=C:\Users\Usuario\javafx\javafx-sdk-25\lib
+set JAVAFX_PATH="C:\Users\rm102\Downloads\javafx-sdk-25\lib"
 set JAVAFX_MODULES=javafx.controls,javafx.fxml,javafx.graphics
 set MYSQL_JAR=lib\mysql-connector-j-9.4.0.jar
 

@@ -25,6 +25,18 @@ public class Receita {
 		this.caloriasTotais = caloriasTotais;
 	}
 
+	
+
+	public ArrayList<TabelaNutricional> getIngredientes() {
+		return ingredientes;
+	}
+
+
+
+	public void setIngredientes(ArrayList<TabelaNutricional> ingredientes) {
+		this.ingredientes = ingredientes;
+	}
+
 
 
 	public int getIdReceita() {
