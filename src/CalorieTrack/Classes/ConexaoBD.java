@@ -32,8 +32,13 @@ public class ConexaoBD {
 
 
     public static void main(String[] args) {
-        conectar(); // apenas para testar
-        fecharConexao( conectar());
-        
+        try (Connection conexao = conectar()) {
+            if (conexao != null) {
+                System.out.println("Conexão testada com sucesso!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }

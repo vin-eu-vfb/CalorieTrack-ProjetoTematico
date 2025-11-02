@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ExercicioDAO {
 	private Connection conexao;
+	ExercicioDAO dao = new ExercicioDAO(conexao);
 	
 	public ExercicioDAO(Connection conect){
 		this.conexao= conect;

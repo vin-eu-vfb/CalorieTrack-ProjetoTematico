@@ -116,8 +116,46 @@ public class Usuario {
 		this.refeicoes = refeicoes;
 	}
 	
-	
-	
+
+	public ArrayList<Receita> getReceitas() {
+		return receitas;
+	}
+
+	public void setReceitas(ArrayList<Receita> receitas) {
+		this.receitas = receitas;
+	}
+
+	public ArrayList<RegistroCalorias> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(ArrayList<RegistroCalorias> registros) {
+		this.registros = registros;
+	}
+
+	public ArrayList<Relatorio> getRelatorios() {
+		return relatorios;
+	}
+
+	public void setRelatorios(ArrayList<Relatorio> relatorios) {
+		this.relatorios = relatorios;
+	}
+
+	public ArrayList<Perfil> getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(ArrayList<Perfil> perfil) {
+		this.perfil = perfil;
+	}
+
+	public ArrayList<Conquista> getConquista() {
+		return conquista;
+	}
+
+	public void setConquista(ArrayList<Conquista> conquista) {
+		this.conquista = conquista;
+	}
 
 	public Usuario criarUsuario(Scanner sc) {		
 		System.out.println("Nome:");

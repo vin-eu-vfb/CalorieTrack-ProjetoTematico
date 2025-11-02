@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabelaNutricionalDAO {
-private Connection conexao;
+	private Connection conexao;
+	TabelaNutricionalDAO dao = new TabelaNutricionalDAO(conexao);
 	
 	public TabelaNutricionalDAO(Connection conect){
 		this.conexao= conect;

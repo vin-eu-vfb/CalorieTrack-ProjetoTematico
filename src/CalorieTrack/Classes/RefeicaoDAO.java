@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 public class RefeicaoDAO {
     private Connection conexao;
-
+    RefeicaoDAO dao = new RefeicaoDAO(conexao);
+    
     public RefeicaoDAO(Connection conexao) {
         this.conexao = conexao;
     }
