@@ -9,14 +9,14 @@ import java.util.List;
 
 public class TabelaNutricionalDAO {
 	private Connection conexao;
-	TabelaNutricionalDAO dao = new TabelaNutricionalDAO(conexao);
+	// TabelaNutricionalDAO dao = new TabelaNutricionalDAO(conexao);
 	
 	public TabelaNutricionalDAO(Connection conect){
 		this.conexao= conect;
 		
 	}
 	public void adicionarBD(TabelaNutricional tabela) throws SQLException{
-		String sql = "INSERT INTO TabelaNutricional (nome, calorias, carboidratos, proteinas, gorduras) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO TabelaNutricional (nome, quantidade, calorias, carboidratos, proteinas, gorduras) VALUES (?, 100, ?, ?, ?, ?)";
 		 PreparedStatement stmt = conexao.prepareStatement(sql);
 		 stmt.setString(1, tabela.getNome());
 	        stmt.setDouble(2, tabela.getCalorias());
@@ -54,7 +54,7 @@ public class TabelaNutricionalDAO {
 	}
 	
 	public List<TabelaNutricional> buscarBD() throws SQLException {
-		String sql = "SELECT * FROM TabelaNutricional WHERE idUsuario = ?";
+		String sql = "SELECT * FROM TabelaNutricional";
         PreparedStatement stmt = conexao.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         

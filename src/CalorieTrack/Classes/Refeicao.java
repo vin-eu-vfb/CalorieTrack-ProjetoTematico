@@ -93,9 +93,13 @@ public class Refeicao {
 		    System.out.println("Informe o horario em HH:MM");
 		    horario=sc.nextLine();
 		    
-		    for(TabelaNutricional a: tabelaNutricional) {
-		    	caloriasTotais= a.getCalorias();
-		    }
+	        caloriasTotais = 0.0;
+	        for(TabelaNutricional a: tabelaNutricional) {
+	            double calPorGrama = a.getCalorias() / 100.0; // calorias por grama
+	            double calItem = calPorGrama * a.getQuantidade();
+	           
+	            caloriasTotais += calItem;
+	        }
 		    
 		   // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 		    
@@ -110,11 +114,13 @@ public class Refeicao {
 	       // }
 		 return new Refeicao(nome,horario,caloriasTotais);
 	}
-	public boolean associarAlimentos(Scanner sc,TabelaNutricional a){
-		a.criarAlimentos(sc);
-		return tabelaNutricional.add(a);
-//lembrar de corrigir possiveis erros
-	}
+	public boolean associarAlimentos(Scanner sc, TabelaNutricional a) {
+        TabelaNutricional novoItem = a.criarAlimentos(sc);
+        if (novoItem != null) {
+            return tabelaNutricional.add(novoItem);
+        }
+        return false;
+    }
 	public boolean alterarTabelaNutricional(Scanner sc, String nome) {
 		String nomeAux;
 		double calorias=0.0;

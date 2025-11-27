@@ -9,7 +9,7 @@ import java.util.List;
 
 public class RelatorioDAO {
 	private Connection conexao;
-	RelatorioDAO dao = new RelatorioDAO(conexao);
+	// RelatorioDAO dao = new RelatorioDAO(conexao);
 	
 	public RelatorioDAO(Connection conect){
 		this.conexao= conect;

@@ -5,7 +5,7 @@ echo ========================================
 echo.
 
 REM Definir caminhos
-set JAVAFX_PATH="C:\Users\rm102\Downloads\javafx-sdk-25\lib"
+set JAVAFX_PATH=C:\Users\Usuario\javafx\javafx-sdk-25\lib
 set JAVAFX_MODULES=javafx.controls,javafx.fxml,javafx.graphics
 set MYSQL_JAR=lib\mysql-connector-j-9.4.0.jar
 
@@ -21,9 +21,9 @@ echo.
 REM Compilar backend
 echo [1/3] Compilando classes do backend...
 if "%MYSQL_JAR%"=="" (
-    javac -d bin -sourcepath src src\CalorieTrack\Classes\*.java
+    javac -Xlint:unchecked -d bin -sourcepath src src\CalorieTrack\Classes\*.java
 ) else (
-    javac -cp "%MYSQL_JAR%" -d bin -sourcepath src src\CalorieTrack\Classes\*.java
+    javac -Xlint:unchecked -cp "%MYSQL_JAR%" -d bin -sourcepath src src\CalorieTrack\Classes\*.java
 )
 
 if %ERRORLEVEL% NEQ 0 (
@@ -39,9 +39,9 @@ echo.
 REM Compilar interface
 echo [2/3] Compilando interface JavaFX...
 if "%MYSQL_JAR%"=="" (
-    javac --module-path "%JAVAFX_PATH%" --add-modules %JAVAFX_MODULES% -cp "bin" -d interface\bin interface\src\MainApp.java
+    javac -Xlint:unchecked --module-path "%JAVAFX_PATH%" --add-modules %JAVAFX_MODULES% -cp "bin" -d interface\bin interface\src\MainApp.java
 ) else (
-    javac --module-path "%JAVAFX_PATH%" --add-modules %JAVAFX_MODULES% -cp "bin;%MYSQL_JAR%" -d interface\bin interface\src\MainApp.java
+    javac -Xlint:unchecked --module-path "%JAVAFX_PATH%" --add-modules %JAVAFX_MODULES% -cp "bin;%MYSQL_JAR%" -d interface\bin interface\src\MainApp.java
 )
 
 if %ERRORLEVEL% NEQ 0 (
@@ -65,9 +65,9 @@ echo ========================================
 echo.
 
 if "%MYSQL_JAR%"=="" (
-    java --module-path "%JAVAFX_PATH%" --add-modules %JAVAFX_MODULES% -cp "bin;interface\bin;interface\src" MainApp
+    java --module-path "%JAVAFX_PATH%" --add-modules %JAVAFX_MODULES% -cp "bin;interface\bin" CalorieTrack.MainApp
 ) else (
-    java --module-path "%JAVAFX_PATH%" --add-modules %JAVAFX_MODULES% -cp "bin;interface\bin;interface\src;%MYSQL_JAR%" MainApp
+    java --module-path "%JAVAFX_PATH%" --add-modules %JAVAFX_MODULES% -cp "bin;interface\bin;%MYSQL_JAR%" CalorieTrack.MainApp
 )
 
 if %ERRORLEVEL% NEQ 0 (

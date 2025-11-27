@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class RefeicaoDAO {
     private Connection conexao;
-    RefeicaoDAO dao = new RefeicaoDAO(conexao);
+    // RefeicaoDAO dao = new RefeicaoDAO(conexao);
     
     public RefeicaoDAO(Connection conexao) {
         this.conexao = conexao;
@@ -16,7 +16,7 @@ public class RefeicaoDAO {
 
     // CREATE
     public void adicionarDB(Refeicao refeicao, int idUsuario) throws SQLException {
-        String sql = "INSERT INTO Refeicao (idUsuario, nomeRefeicao, horario, caloriasTotais) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Refeicao (idUsuario, nome, horario, caloriasTotais) VALUES (?, ?, ?, ?)";
         PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, idUsuario);
         stmt.setString(2, refeicao.getNomeRefeicao());
@@ -32,10 +32,13 @@ public class RefeicaoDAO {
 
         
         for (TabelaNutricional t : refeicao.getTabelaNutricional()) {
-            String sql2 = "INSERT INTO Refeicao_Tabela (idRefeicao, idTabela) VALUES (?, ?)";
+            String sql2 = "INSERT INTO refeicao_tabelanutricional (idRefeicao, idTabelaNutricional, quantidade) VALUES (?, ?, ?)";
             PreparedStatement stmt2 = conexao.prepareStatement(sql2);
+            double quantidade = t.getQuantidade();
+            
             stmt2.setInt(1, idRefeicao);
             stmt2.setInt(2, t.getIdTabela());
+            stmt2.setDouble(3, quantidade);
             stmt2.executeUpdate();
             stmt2.close();
         }
@@ -53,13 +56,13 @@ public class RefeicaoDAO {
         while (rs.next()) {
             Refeicao r = new Refeicao();
             r.setIdRefeicao(rs.getInt("idRefeicao"));
-            r.setNomeRefeicao(rs.getString("nomeRefeicao"));
+            r.setNomeRefeicao(rs.getString("nome"));
             r.setHorario(rs.getString("horario"));
             r.setCaloriasTotais(rs.getDouble("caloriasTotais"));
 
            
-            String sql2 = "SELECT t.* FROM TabelaNutricional t "
-                        + "INNER JOIN Refeicao_Tabela rt ON t.idTabela = rt.idTabela "
+            String sql2 = "SELECT t.*, rt.quantidade FROM TabelaNutricional t "
+                        + "INNER JOIN refeicao_tabelanutricional rt ON t.idTabelaNutricional = rt.idTabelaNutricional "
                         + "WHERE rt.idRefeicao = ?";
             PreparedStatement stmt2 = conexao.prepareStatement(sql2);
             stmt2.setInt(1, r.getIdRefeicao());
@@ -68,12 +71,13 @@ public class RefeicaoDAO {
             ArrayList<TabelaNutricional> alimentos = new ArrayList<>();
             while (rs2.next()) {
                 TabelaNutricional t = new TabelaNutricional();
-                t.setIdTabela(rs2.getInt("idTabela"));
+                t.setIdTabela(rs2.getInt("idTabelaNutricional"));
                 t.setNome(rs2.getString("nome"));
                 t.setCalorias(rs2.getDouble("calorias"));
                 t.setCarboidratos(rs2.getDouble("carboidratos"));
                 t.setProteinas(rs2.getDouble("proteinas"));
                 t.setGorduras(rs2.getDouble("gorduras"));
+                t.setQuantidade(rs2.getDouble("quantidade"));
                 alimentos.add(t);
             }
             rs2.close();
@@ -89,7 +93,7 @@ public class RefeicaoDAO {
 
     
     public void editarDB(Refeicao refeicao) throws SQLException {
-        String sql = "UPDATE Refeicao SET nomeRefeicao = ?, horario = ?, caloriasTotais = ? WHERE idRefeicao = ?";
+        String sql = "UPDATE Refeicao SET nome = ?, horario = ?, caloriasTotais = ? WHERE idRefeicao = ?";
         PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setString(1, refeicao.getNomeRefeicao());
         stmt.setString(2, refeicao.getHorario());

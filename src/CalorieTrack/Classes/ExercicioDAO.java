@@ -9,14 +9,13 @@ import java.util.List;
 
 public class ExercicioDAO {
 	private Connection conexao;
-	ExercicioDAO dao = new ExercicioDAO(conexao);
+	// ExercicioDAO dao = new ExercicioDAO(conexao);
 	
-	public ExercicioDAO(Connection conect){
-		this.conexao= conect;
-		
+	public ExercicioDAO(Connection conect) {
+		this.conexao = conect;
 	}
 	public void adicionarBD(Exercicio exercicio, int idUsuario) throws SQLException{
-		String sql = "INSERT INTO Exercicio (idUsuario,nome, duracao, intensidade, caloriasGastas) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO Exercicio (idUsuario,nome, duracao, intensidade, caloriasGastas) VALUES (?,?, ?, ?, ?)";
 		 PreparedStatement stmt = conexao.prepareStatement(sql);
 		 	stmt.setInt(1, idUsuario);
 		 	stmt.setString(2, exercicio.getNome());
@@ -37,24 +36,24 @@ public class ExercicioDAO {
 	    
 	}
 	
-	public void editarBD(Exercicio exercicio, int idUsuario, int idExercicio) throws SQLException {
-		
-	        String sql = "UPDATE Exercicio SET nome = ?, duracao = ?, intensidade = ?, caloriasGastas = ?  WHERE idExercicio = ? AND idUsuario = ?";
-	        PreparedStatement stmt = conexao.prepareStatement(sql);
-	        stmt.setInt(1, idExercicio);
-	        stmt.setInt(2, idUsuario);
-	        stmt.setString(2, exercicio.getNome());
-	        stmt.setDouble(3, exercicio.getDuracao());
-	        stmt.setString(4, exercicio.getIntensidade());
-	        stmt.setDouble(5, exercicio.getCaloriasGastas());
-	        stmt.executeUpdate();
-	        stmt.close();
+public void editarBD(Exercicio exercicio, int idUsuario, int idExercicio) throws SQLException {
+		String sql = "UPDATE Exercicio SET nome = ?, duracao = ?, intensidade = ?, caloriasGastas = ?  WHERE idExercicio = ? AND idUsuario = ?";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		stmt.setString(1, exercicio.getNome());
+		stmt.setDouble(2, exercicio.getDuracao());
+		stmt.setString(3, exercicio.getIntensidade());
+		stmt.setDouble(4, exercicio.getCaloriasGastas());
+		stmt.setInt(5, idExercicio);
+		stmt.setInt(6, idUsuario);
+		stmt.executeUpdate();
+		stmt.close();
 	  
 	}
 	
-	public List<Exercicio> buscarBD() throws SQLException {
+		public List<Exercicio> buscarBD(int idUsuario) throws SQLException {
 		String sql = "SELECT * FROM Exercicio WHERE idUsuario = ?";
-        PreparedStatement stmt = conexao.prepareStatement(sql);
+	    PreparedStatement stmt = conexao.prepareStatement(sql);
+	    stmt.setInt(1, idUsuario);
         ResultSet rs = stmt.executeQuery();
         
         List<Exercicio> lista = new ArrayList<>();

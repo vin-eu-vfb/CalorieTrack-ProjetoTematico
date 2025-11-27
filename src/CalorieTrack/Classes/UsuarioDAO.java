@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class UsuarioDAO {
 	 private Connection conexao;
-	 UsuarioDAO dao = new UsuarioDAO(conexao);
+	//  UsuarioDAO dao = new UsuarioDAO(conexao);
 	 
 	public UsuarioDAO(Connection conexao) {
 		super();

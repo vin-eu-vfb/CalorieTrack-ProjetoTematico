@@ -110,46 +110,87 @@ public class TabelaNutricional {
 	
 	
 	public TabelaNutricional criarAlimentos(Scanner sc) {
-		
-		System.out.println("Digite o nome do alimento:");
-		String nome=sc.nextLine();
-		double proteinas=0;
-		double gorduras=0;
-		double carboidratos=0;
-		
-		 double quantidade = 0;
-		    while (true) {
-		        try {
-		            System.out.println("Informe a quantidade em gramas");
-		            quantidade = sc.nextDouble();
-		            break;
-		        } catch (InputMismatchException e) {
-		            System.out.println("Por favor, insira um número válido para a quantidade.");
-		            sc.nextLine();
-		        }
-		    }
-		 double calorias = 0;
-		    while (true) {
-		        try {
-		            System.out.println("Calorias a cada 100g:");
-		            calorias = sc.nextDouble();
-		            break;
-		        } catch (InputMismatchException e) {
-		            System.out.println("Por favor, insira um número válido para o n° de calorias");
-		            sc.nextLine();
-		        }
-		    }
-		    System.out.println("Digite o n° de proteinas a cada 100g");
-			proteinas= sc.nextDouble();
-			sc.nextLine();
-			System.out.println("Digite o n° de gorduras a cada 100g");
-			gorduras= sc.nextDouble();
-			sc.nextLine();
-			System.out.println("Digite o n° de carboidratos a cada 100g");
-			carboidratos= sc.nextDouble();
-			sc.nextLine();
-		   return new TabelaNutricional(quantidade,calorias,nome,carboidratos,proteinas,gorduras); 
-	}
+        
+        System.out.println("Digite o nome do alimento:");
+        String nome = sc.nextLine();
+        
+        double quantidade = 0;
+        while (true) {
+            try {
+                System.out.println("Informe a quantidade em gramas");
+                quantidade = sc.nextDouble();
+                sc.nextLine(); // Consume newline
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira um número válido para a quantidade.");
+                sc.nextLine(); // Clear the invalid input
+            }
+        }
+        
+        double calorias = 0;
+        while (true) {
+            try {
+                System.out.println("Calorias a cada 100g:");
+                calorias = sc.nextDouble();
+                sc.nextLine(); // Consume newline
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira um número válido para o n° de calorias");
+                sc.nextLine(); // Clear the invalid input
+            }
+        }
+        
+        double proteinas = 0;
+        while (true) {
+            try {
+                System.out.println("Digite o n° de proteinas a cada 100g");
+                proteinas = sc.nextDouble();
+                sc.nextLine(); // Consume newline
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira um número válido.");
+                sc.nextLine(); // Clear the invalid input
+            }
+        }
+        
+        double gorduras = 0;
+        while (true) {
+            try {
+                System.out.println("Digite o n° de gorduras a cada 100g");
+                gorduras = sc.nextDouble();
+                sc.nextLine(); // Consume newline
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira um número válido.");
+                sc.nextLine(); // Clear the invalid input
+            }
+        }
+        
+        double carboidratos = 0;
+        while (true) {
+            try {
+                System.out.println("Digite o n° de carboidratos a cada 100g");
+                carboidratos = sc.nextDouble();
+                sc.nextLine(); // Consume newline
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira um número válido.");
+                sc.nextLine(); // Clear the invalid input
+            }
+        }
+        
+        // Create and return a new TabelaNutricional object with all the values
+        TabelaNutricional novoAlimento = new TabelaNutricional();
+        novoAlimento.setNome(nome);
+        novoAlimento.setQuantidade(quantidade);
+        novoAlimento.setCalorias(calorias);
+        novoAlimento.setProteinas(proteinas);
+        novoAlimento.setGorduras(gorduras);
+        novoAlimento.setCarboidratos(carboidratos);
+
+        
+        return novoAlimento;
+    }
 
 
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ReceitaDAO {
     private Connection conexao;
-    ReceitaDAO dao = new ReceitaDAO(conexao);
+    // ReceitaDAO dao = new ReceitaDAO(conexao);
     
     public ReceitaDAO(Connection conexao) {
         this.conexao = conexao;

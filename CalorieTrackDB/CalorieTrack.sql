@@ -191,14 +191,17 @@ DROP TABLE IF EXISTS `refeicao_tabelanutricional`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `refeicao_tabelanutricional` (
-  `idRefeicao` int NOT NULL,
-  `idTabelaNutricional` int NOT NULL,
-  `quantidade` double DEFAULT NULL,
-  PRIMARY KEY (`idRefeicao`,`idTabelaNutricional`),
-  KEY `idTabelaNutricional` (`idTabelaNutricional`),
-  CONSTRAINT `refeicao_tabelanutricional_ibfk_1` FOREIGN KEY (`idRefeicao`) REFERENCES `refeicao` (`idRefeicao`),
-  CONSTRAINT `refeicao_tabelanutricional_ibfk_2` FOREIGN KEY (`idTabelaNutricional`) REFERENCES `tabelanutricional` (`idTabelaNutricional`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`idRefeicao` INT NOT NULL,
+	`idTabelaNutricional` INT NOT NULL,
+	`quantidade` DOUBLE NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `idTabelaNutricional` (`idTabelaNutricional`) USING BTREE,
+	INDEX `idRefeicao` (`idRefeicao`) USING BTREE,
+	CONSTRAINT `refeicao_tabelanutricional_ibfk_1` FOREIGN KEY (`idRefeicao`) REFERENCES `refeicao` (`idRefeicao`) ON UPDATE NO ACTION ON DELETE NO ACTION,
+	CONSTRAINT `refeicao_tabelanutricional_ibfk_2` FOREIGN KEY (`idTabelaNutricional`) REFERENCES `tabelanutricional` (`idTabelaNutricional`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)COLLATE='utf8mb4_0900_ai_ci'ENGINE=InnoDB;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

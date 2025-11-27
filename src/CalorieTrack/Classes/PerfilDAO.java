@@ -10,7 +10,7 @@ import java.util.List;
 public class PerfilDAO {
 	
 	private Connection conexao;
-	PerfilDAO dao= new PerfilDAO(conexao);
+	// PerfilDAO dao= new PerfilDAO(conexao);
 	
 	public PerfilDAO(Connection conect){
 		this.conexao= conect;

@@ -35,7 +35,7 @@ public class Funcoes {
 		Connection conn = ConexaoBD.conectar();
 		
 		try {
-			String sqlVerifica = "SELECT id_usuario FROM Usuario WHERE email = ?";
+			String sqlVerifica = "SELECT idUsuario FROM Usuario WHERE email = ?";
 			PreparedStatement psVerifica = conn.prepareStatement(sqlVerifica);
 			psVerifica.setString(1, novoUsuario.getEmail());
 			ResultSet rs = psVerifica.executeQuery();
@@ -88,7 +88,7 @@ public class Funcoes {
 				
 				if (rs.next()) {
 					Usuario usuario = new Usuario();
-					usuario.setIdUsuario(rs.getInt("id_usuario"));
+					usuario.setIdUsuario(rs.getInt("idUsuario"));
 					usuario.setNome(rs.getString("nome"));
 					usuario.setEmail(rs.getString("email"));
 					usuario.setSenha(rs.getString("senha"));

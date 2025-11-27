@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class RegistroCaloriasDAO {
     private Connection conexao;
-    RegistroCaloriasDAO dao = new RegistroCaloriasDAO(conexao);
+    // RegistroCaloriasDAO dao = new RegistroCaloriasDAO(conexao);
     
     public RegistroCaloriasDAO(Connection conexao) {
         this.conexao = conexao;
